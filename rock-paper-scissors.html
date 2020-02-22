@@ -5,13 +5,13 @@
   </head>
   <body>
     <script type="text/javascript">
-      var computerSelection;
-      var playerSelection;
-      var result;
+      var computerSelection, playerSelection, result;
 
       function playRound(computerSelection, playerSelection) {
+        // randomly chooses the computers choice from the "choices" array
         let choices = ["ROCK", "PAPER", "SCISSORS"];
         computerSelection = choices[Math.floor(Math.random() * choices.length)];
+        // gets choice from player and compares it to computer choice to see who wins, and returns result with the winner
         playerSelection = prompt("Rock, paper, or scissors?");
         playerSelection = playerSelection.toUpperCase();
         if (
@@ -31,7 +31,8 @@
         }
         return result;
       }
-      function game() {
+      function playGame() {
+        // runs the playRound() function 5 times and keeps track of the score
         let playerScore = 0;
         let computerScore = 0;
         for (i = 0; i < 5; i++) {
@@ -49,7 +50,7 @@
           console.log(`Computer Score: ${computerScore}`);
           console.log(`Player Score: ${playerScore}`);
         }
-
+        // compares the score after 5 rounds and alerts the winner
         playerScore == computerScore
           ? console.log("The game was a tie!!")
           : playerScore > computerScore
