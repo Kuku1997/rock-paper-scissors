@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rock Paper Scissors Game</title>
+  </head>
+  <body>
+    <script type="text/javascript">
+      var computerSelection;
+      var playerSelection;
+      var result;
+      let playerScore = 0;
+      let computerScore = 0;
+
+      function playRound(computerSelection, playerSelection) {
+        let choices = ["ROCK", "PAPER", "SCISSORS"];
+        computerSelection = choices[Math.floor(Math.random() * choices.length)];
+        playerSelection = prompt("Rock, paper, or scissors?");
+        playerSelection = playerSelection.toUpperCase();
+        if (
+          (playerSelection == "ROCK" && computerSelection == "PAPER") ||
+          (playerSelection == "PAPER" && computerSelection == "SCISSORS") ||
+          (playerSelection == "SCISSORS" && computerSelection == "ROCK")
+        ) {
+          result = "CompWin";
+        } else if (
+          (computerSelection == "ROCK" && playerSelection == "PAPER") ||
+          (computerSelection == "PAPER" && playerSelection == "SCISSORS") ||
+          (computerSelection == "SCISSORS" && playerSelection == "ROCK")
+        ) {
+          result = "PlayWin";
+        } else {
+          result = "Tie";
+        }
+        return result;
+      }
+      function game() {
+        for (i = 0; i < 5; i++) {
+          playRound(computerSelection, playerSelection);
+          if (result == "CompWin") {
+            computerScore++;
+            console.log("The computer won that round!");
+          } else if (result == "PlayWin") {
+            playerScore++;
+            console.log("You won that round!");
+          } else {
+            //score remains unchanged
+            console.log("That round was a tie!");
+          }
+          console.log(`Computer Score: ${computerScore}`);
+          console.log(`Player Score: ${playerScore}`);
+        }
+
+        playerScore == computerScore
+          ? console.log("The game was a tie!!")
+          : playerScore > computerScore
+          ? console.log("You won the game!!")
+          : console.log("You lost the game!!");
+      }
+    </script>
+  </body>
+</html>
