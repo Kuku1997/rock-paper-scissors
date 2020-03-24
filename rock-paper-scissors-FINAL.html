@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Rock Paper Scissors Game</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!--Centre scoreboard for the game-->
+    <div id="mainContent">
+      <h1 id="title">ROCK PAPER SCISSORS</h1>
+      <h3 id="subTitle">FIRST TO GET 5 POINTS WINS!</h3>
+    <!-- Displays the user and comp score...updated by javascript as game plays-->
+      <div id="scoreboard">
+        <div class="userScore">
+          <p id="score">User Score:</p>
+          <p id="uScore"></p>
+          <script>
+            document.getElementById("uScore").innerHTML = 0;
+          </script>
+        </div>
+        <div class="compScore">
+          <p id="score">Computer Score:</p>
+          <p id="cScore"></p>
+          <script>
+            document.getElementById("cScore").innerHTML = 0;
+          </script>
+        </div>
+      </div>
+      <h3 id= "rematch"></h3>
+    </div>
+    
+    <!--Buttons that allow user to make their selection-->
+    <div id="buttons">
+      <div id="button1"">
+        <button>ROCK</button>
+      </div>
+      <div id="button2"">
+        <button>PAPER</button>
+      </div>
+      <div id="button3">
+        <button>SCISSORS</button>
+      </div>
+    </div>
+
+    <script type="text/javascript">
+      var computerSelection, playerSelection, result;
+      let playerScore = 0;
+      let compScore = 0;
+
+      //restart button
+      document.getElementById("rematch").addEventListener ("click", () => {
+      location.reload();
+      });
+
+      //if user clicks "ROCK" button, set that as their choice and plays round
+      document.getElementById("button1").addEventListener("click", () => {
+        playerSelection = "ROCK";
+        playGame()
+      });
+
+      //if user clicks "PAper" button, set that as their choice and plays round
+      document.getElementById("button2").addEventListener("click", () => {
+        playerSelection = "PAPER";
+        playGame()
+      });
+
+      //if user clicks "SCISSORS" button, set that as their choice and plays round
+      document.getElementById("button3").addEventListener("click", () => {
+        playerSelection = "SCISSORS";
+        playGame()
+      });
+
+      function playGame(computerSelection, playerSelection) {
+        // randomly chooses the computers choice from the "choices" array
+        let choices = ["ROCK", "PAPER", "SCISSORS"];
+        computerSelection = choices[Math.floor(Math.random() * choices.length)];
+        if (
+          (this.playerSelection == "ROCK" && computerSelection == "PAPER") ||
+          (this.playerSelection == "PAPER" && computerSelection == "SCISSORS") ||
+          (this.playerSelection == "SCISSORS" && computerSelection == "ROCK")
+        ) {
+          result = "CompWin";
+          compScore++;
+        } else if (
+          (computerSelection == "ROCK" && this.playerSelection == "PAPER") ||
+          (computerSelection == "PAPER" && this.playerSelection == "SCISSORS") ||
+          (computerSelection == "SCISSORS" && this.playerSelection == "ROCK")
+        ) {
+          result = "PlayWin";
+          playerScore++;
+        } else {
+          result = "Tie";
+        }
+        keepScore();
+        gameWin(playerScore, compScore);
+        console.log(playerScore);
+        console.log(compScore);
+        return result;
+      }
+
+        function keepScore () {
+        // if computer won increment computer scoreboard
+        if (result == "CompWin") {
+          var cScore = document.getElementById("cScore");
+          var number = cScore.innerHTML;
+          number++;
+          cScore.innerHTML = number;
+         // if user won incremement user scoreboard 
+      } else if (result == "PlayWin") {
+          var uScore = document.getElementById("uScore");
+          var number = uScore.innerHTML;
+          number++;
+          uScore.innerHTML = number;
+      } else {
+          document.getElementById("subTitle").innerHTML = "TIE! Go again"
+      }
+      } 
+      // announces winner after either player or compt get 5 points 
+      function gameWin(playerScore, compScore) {
+        if (playerScore == 5) {
+          document.getElementById("title").innerHTML = "YOU WIN!!!"
+          document.getElementById("subTitle").innerHTML = "Good Job!"
+          newMatch()
+      } else if (compScore == 5) {
+          document.getElementById("title").innerHTML = "YOU   LOST!"
+          document.getElementById("subTitle").innerHTML = "Better Luck Next Time!"
+          newMatch()
+      } else {
+          // no change
+      }
+      function newMatch() {
+        document.getElementById("rematch").innerHTML = 
+        "CLICK HERE TO RESTART"
+      }
+      }
+    </script>
+  </body>
+</html>
